@@ -1,36 +1,58 @@
 import express from 'express';
 import multer from 'multer';
-import path from 'path';
 import cors from 'cors';
+import path from 'path';
 import { generateCaption } from './blip.js';
-import { runScraper } from './scrape.js'; 
+import { runScraper } from './scrape.js';
+import fs from 'fs/promises'; 
+import dotenv from 'dotenv';
+dotenv.config();
 
 const app = express();
-const upload = multer({ dest: 'uploads/' });
+const upload = multer({ storage: multer.memoryStorage() });
 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+import os from 'os';
+import { v4 as uuidv4 } from 'uuid';
 
 app.post('/recommend', upload.single('image'), async (req, res) => {
   if (!req.file) {
     return res.status(400).json({ message: 'No image uploaded' });
   }
 
-  const imagePath = path.join(process.cwd(), req.file.path);
+  const tempFilePath = path.join(os.tmpdir(), `${uuidv4()}.jpg`);
+  await fs.writeFile(tempFilePath, req.file.buffer);
 
   try {
-    const caption = await generateCaption(imagePath);
+    const caption = await generateCaption(tempFilePath);
+
+    await fs.unlink(tempFilePath);
+
     res.json({
       message: 'Caption generated. Now searching...',
       caption
     });
-
-    const products = await runScraper(caption);
-    console.log('Scraped Products:', products);
-
   } catch (error) {
     console.error('Error in processing:', error);
+    res.status(500).json({ message: 'Caption generation failed' });
+  }
+});
+
+app.get('/scrape', async (req, res) => {
+  const query = req.query.query;
+  if (!query) {
+    return res.status(400).json({ message: 'Query is required' });
+  }
+
+  try {
+    const products = await runScraper(query);
+    res.json({ products });
+  } catch (error) {
+    console.error('Error in scraping:', error);
+    res.status(500).json({ message: 'Failed to fetch products' });
   }
 });
 
