@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "@google-cloud/vision": "^5.2.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "fs": "^0.0.1-security",
+    "mongoose": "^8.15.1",
+    "multer": "^2.0.1",
+    "nodemon": "^3.1.10",
+    "path": "^0.12.7",
+    "pixelmatch": "^7.1.0",
+    "pngjs": "^7.0.0",
+    "puppeteer": "^24.10.1"
+  },
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "type": "module"
+}
