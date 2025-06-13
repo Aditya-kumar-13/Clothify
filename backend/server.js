@@ -13,7 +13,8 @@ const upload = multer({ storage: multer.memoryStorage() });
 
 app.use(cors({
   origin: process.env.CORS_ORIGIN,
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST'],
 }));
 
 app.use(express.json());
