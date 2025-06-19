@@ -1,23 +1,23 @@
-# 🧠 Clothify — Visual Fashion Recommendation Engine
+# Clothify — Visual Fashion Recommendation Engine
 
 Clothify is a full-stack application that allows users to upload an image (e.g., a fashion item), automatically generates a descriptive caption using BLIP (Bootstrapped Language-Image Pretraining), scrapes relevant product listings based on that caption using Playwright, and presents them in a beautiful frontend interface.
 
-## 🎥 Demo
+## Demo
 
 https://github.com/user-attachments/assets/8e62e89f-626f-4262-a5e3-1d845ecef009
 
 ---
 
-## ✨ Features
+## Features
 
-- 📸 **Image to Text**: Uses [Salesforce BLIP](https://huggingface.co/Salesforce/blip-image-captioning-base) to generate natural-language captions from uploaded images.
-- 🔍 **Automated Scraping**: Uses [Playwright](https://playwright.dev/) to search e-commerce websites and extract relevant results.
-- ⚡ **Fast API Backend**: Built with Express and Python to bridge the image model and browser automation.
-- 🌐 **Frontend Integration**: Results are displayed dynamically in a sleek web interface (hosted on Vercel).
+-  **Image to Text**: Uses [Salesforce BLIP](https://huggingface.co/Salesforce/blip-image-captioning-base) to generate natural-language captions from uploaded images.
+-  **Automated Scraping**: Uses [Playwright](https://playwright.dev/) to search e-commerce websites and extract relevant results.
+-  **Fast API Backend**: Built with Express and Python to bridge the image model and browser automation.
+-  **Frontend Integration**: Results are displayed dynamically in a sleek web interface (hosted on Vercel).
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```bash
 .
